@@ -4,11 +4,12 @@
 #include <algorithm>
 
 #include "Observer.h"
+#include "Prototype.h"
 #include "MicrofoneCronometro.h"
 
 class Mediador;
 
-class PoliticoColaborador {
+class PoliticoColaborador : public Prototype {
 
 protected:
 
@@ -31,6 +32,12 @@ public:
       sorteado(false),
       mediador(nullptr) {}
 
+
+      void set_nome(
+    const std::string& novoNome
+){
+    nome = novoNome;
+}
     std::string get_nome() {
         return nome;
     }
@@ -95,4 +102,13 @@ public:
     ){
         sorteado = op;
     }
+
+    PoliticoColaborador*
+        clone() const override {
+
+    return new
+        PoliticoColaborador(
+            nome
+        );
+}
 };

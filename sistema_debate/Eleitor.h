@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Observer.h"
+#include "Prototype.h"
 #include <iostream>
 
-class Eleitor : public Observer {
+class Eleitor : public Observer, 
+                public Prototype{
 
 private:
 
@@ -26,4 +28,13 @@ public:
             << msg
             << std::endl;
     }
+
+    Eleitor*
+        clone() const override {
+
+        return new
+            Eleitor(
+                *this
+            );
+}
 };
