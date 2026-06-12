@@ -58,6 +58,10 @@ public:
         PoliticoColaborador* p
     ){
 
+        p->set_mediador(&mediador);
+
+        p->configurar_microfone(&mediador);
+
         gerencia.criar_politico(p);
 
         logger->register_log(
@@ -149,21 +153,43 @@ public:
         );
     }
 
-    void iniciar_debate(){
+    void iniciar_debate(
+    int rodadas = 1
+){
+
+    logger->register_log(
+        "Debate iniciado"
+    );
+
+    for(
+        int i = 0;
+        i < rodadas;
+        i++
+    ){
 
         logger->register_log(
-            "Debate iniciado"
-        );
+    "========== RODADA "
+    + std::to_string(i + 1)
+    + " =========="
+);
+
+        sortear_participantes();
 
         mediador.debate(
             config
         );
     }
+}
+
+//     void solicitar_direito_resposta(
+//     const std::string& nome
+// );
 
     void mostrar_logs(){
 
         logger->show_logs();
     }
+
 };
 
 Facade* Facade::instance = nullptr;

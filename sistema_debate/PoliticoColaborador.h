@@ -4,8 +4,10 @@
 #include <algorithm>
 
 #include "Observer.h"
+#include "Logger.h"
 #include "Prototype.h"
 #include "MicrofoneCronometro.h"
+#include "GerenciadorDireitoResposta.h"
 
 class Mediador;
 
@@ -87,11 +89,17 @@ public:
         microfone.desativar();
     }
 
+    void configurar_microfone(
+    MediadorDebate* med
+){
+    microfone.set_mediador(med);
+}
+
     void set_mediador(
-        Mediador* med
-    ){
-        mediador = med;
-    }
+    Mediador* med
+){
+    mediador = med;
+}
 
     bool get_sorteado(){
         return sorteado;
@@ -111,4 +119,18 @@ public:
             nome
         );
 }
+
+    void solicitar_direito_resposta(){
+
+    Logger::get_instance()
+        ->register_log(
+            "Pedido de DR: "
+            + nome
+        );
+
+    microfone.solicitar_dr(
+        this
+    );
+}
+
 };

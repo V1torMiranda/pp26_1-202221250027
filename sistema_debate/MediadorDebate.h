@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Mediador.h"
-#include "PoliticoColaborador.h"
-#include "Configuracao.h"
-#include "Logger.h"
+#include "GerenciadorDireitoResposta.h"
+
+class PoliticoColaborador;
+class Configuracao;
+class EstadoDebate;
 
 class MediadorDebate
 : public Mediador {
@@ -11,55 +13,42 @@ class MediadorDebate
 private:
 
     PoliticoColaborador* inquiridor;
+
     PoliticoColaborador* inquirido;
+
+    EstadoDebate* estadoAtual;
+
+    GerenciadorDireitoResposta gerenciadorDR;
 
 public:
 
+    MediadorDebate();
+
     void set_inquiridor(
         PoliticoColaborador* p
-    ){
-        inquiridor = p;
-    }
+    );
 
     void set_inquirido(
         PoliticoColaborador* p
-    ){
-        inquirido = p;
-    }
+    );
+
+    PoliticoColaborador*
+    get_inquiridor();
+
+    PoliticoColaborador*
+    get_inquirido();
+
+    void set_estado(
+        EstadoDebate* estado
+    );
+
+    EstadoDebate*
+    get_estado();
+
+    GerenciadorDireitoResposta&
+    get_gerenciador_dr();
 
     void debate(
         Configuracao& config
-    ) override {
-
-        Logger::get_instance()
-            ->register_log("Pergunta");
-
-        inquiridor->falar(
-            config.get_pergunta_tempo()
-        );
-
-        Logger::get_instance()
-            ->register_log("Resposta");
-
-        inquirido->falar(
-            config.get_resposta_tempo()
-        );
-
-        Logger::get_instance()
-            ->register_log("Replica");
-
-        inquiridor->falar(
-            config.get_replica_tempo()
-        );
-
-        Logger::get_instance()
-            ->register_log("Treplica");
-
-        inquirido->falar(
-            config.get_treplica_tempo()
-        );
-
-        Logger::get_instance()
-            ->register_log("Debate encerrado");
-    }
+    ) override;
 };

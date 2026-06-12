@@ -1,5 +1,5 @@
+#include <iostream>
 #include "Facade.h"
-
 #include "DiretorCadastro.h"
 #include "PoliticoConcretoBuilder.h"
 #include "EleitorConcretoBuilder.h"
@@ -100,16 +100,16 @@ int main() {
     // Prototype
     // =========================
 
-    auto lulaClone =
-        lula->clone();
+    // auto lulaClone =
+    //     lula->clone();
 
-    lulaClone->set_nome(
-        "Lula Clone"
-    );
+    // lulaClone->set_nome(
+    //     "Lula Clone"
+    // );
 
-    facade->cadastrar_politico(
-        lulaClone
-    );
+    // facade->cadastrar_politico(
+    //     lulaClone
+    // );
 
     // =========================
     // Configuracao
@@ -126,7 +126,11 @@ int main() {
     // Sorteio automatico
     // =========================
 
-    facade->sortear_participantes();
+    
+
+    bolsonaro->solicitar_direito_resposta();
+
+    vitor->solicitar_direito_resposta(); 
 
     // =========================
     // Debate
@@ -143,14 +147,14 @@ int main() {
     << lula
     << std::endl;
 
-    std::cout
-    << "Clone: "
-    << lulaClone->get_nome()
-    << " | Endereco: "
-    << lulaClone
-    << std::endl;
+    // std::cout
+    // << "Clone: "
+    // << lulaClone->get_nome()
+    // << " | Endereco: "
+    // << lulaClone
+    // << std::endl;
 
-    facade->iniciar_debate();
+    facade->iniciar_debate(2);
 
     facade->mostrar_logs();
 

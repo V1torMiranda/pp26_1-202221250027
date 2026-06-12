@@ -1,36 +1,29 @@
 #pragma once
 
-#include <iostream>
-#include <thread>
-#include <chrono>
+class PoliticoColaborador;
+class MediadorDebate;
 
 class MicrofoneCronometro {
 
+private:
+
+    bool ligado;
+
+    MediadorDebate* mediador;
+
 public:
 
-    void ativar(){
+    MicrofoneCronometro();
 
-        std::cout
-            << "Microfone ativado\n";
-    }
+    void ativar();
 
-    void desativar(){
+    void desativar();
+    void esperar_tempo(int tempo);
+    void set_mediador(
+        MediadorDebate* m
+    );
 
-        std::cout
-            << "Microfone desativado\n";
-    }
-
-    void esperar_tempo(
-        int tempo
-    ){
-
-        std::cout
-            << "Tempo de fala: "
-            << tempo
-            << "s\n";
-
-        std::this_thread::sleep_for(
-            std::chrono::seconds(tempo)
-        );
-    }
+    void solicitar_dr(
+        PoliticoColaborador* politico
+    );
 };
